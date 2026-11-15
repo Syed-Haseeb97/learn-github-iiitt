@@ -62,5 +62,13 @@ export const flowchartStages: FlowchartStage[] = [
         cmd: 'tools/list → tools/call',
         summary: 'Guided by .github/copilot-instructions.md, Copilot Agent Mode plans, executes, and self-heals code while querying the GitHub MCP Server under managed-settings.json allowlists.',
         keyObjects: 'JSON-RPC 2.0 (STDIO / HTTP+SSE) → GitHub MCP Toolsets'
+      },
+      {
+        id: 7,
+        step: 'STAGE 07',
+        name: 'Upstream Sync & Releases',
+        cmd: 'git remote add upstream / git tag',
+        summary: 'Forks track central upstream repos with git fetch & rebase. Changes are safeguarded with git stash, and production releases are versioned via SemVer tags and GitHub Releases.',
+        keyObjects: 'upstream/main → git stash stack → git tag -a v1.0.0 → GitHub Release'
       }
     ];

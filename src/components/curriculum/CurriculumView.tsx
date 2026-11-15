@@ -24,6 +24,7 @@ import {
   Lightbulb,
   CheckCircle2,
   BookOpen,
+  GitFork,
 } from 'lucide-react';
 
 export const CurriculumView: React.FC = () => {
@@ -59,6 +60,8 @@ export const CurriculumView: React.FC = () => {
         return Bot;
       case 9:
         return Network;
+      case 10:
+        return GitFork;
       default:
         return BookOpen;
     }
@@ -80,24 +83,24 @@ export const CurriculumView: React.FC = () => {
         </h1>
 
         <p className="mt-4 max-w-3xl text-sm sm:text-base leading-relaxed text-muted">
-          A definitive, nine-phase progressive curriculum for Indian Institute of Information Technology,
+          A definitive, ten-phase progressive curriculum for Indian Institute of Information Technology,
           Tiruchirappalli developers. Slow-paced for complete beginners on day one, journeying from basic repositories,
-          commits, and code uploads to enterprise CI/CD, OIDC federation, and Model Context Protocol (MCP) AI agents.
+          commits, and code uploads to enterprise CI/CD, OIDC federation, Model Context Protocol (MCP) AI agents, and the open-source workflow.
         </p>
       </section>
 
-      {/* Phase Progression Stepper Grid (9 Phases) */}
+      {/* Phase Progression Stepper Grid (10 Phases) */}
       <section className="space-y-3">
         <div className="flex items-center justify-between">
           <h2 className="font-mono text-xs uppercase tracking-wider font-bold text-muted">
-            01 / NINE-PHASE PROGRESSIVE ROADMAP
+            01 / TEN-PHASE PROGRESSIVE ROADMAP
           </h2>
           <span className="font-mono text-xs text-safe font-semibold">
-            Phase {activePhase.id} of 9 Selected
+            Phase {activePhase.id} of 10 Selected
           </span>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-2.5">
+        <div className="grid grid-cols-2 sm:grid-cols-5 lg:grid-cols-10 gap-2">
           {phasesData.map((phase) => {
             const Icon = getPhaseIcon(phase.id);
             const isSelected = phase.id === activePhase.id;
@@ -106,7 +109,7 @@ export const CurriculumView: React.FC = () => {
                 key={phase.id}
                 type="button"
                 onClick={() => setActivePhase(phase.id)}
-                className={`p-3 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between ${
+                className={`p-2.5 sm:p-3 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between ${
                   isSelected
                     ? 'border-safe bg-surface shadow-md ring-2 ring-safe/20'
                     : 'border-line bg-surface/70 hover:bg-surface hover:border-line'
@@ -120,7 +123,7 @@ export const CurriculumView: React.FC = () => {
                         : 'bg-paper text-muted border border-line'
                     }`}
                   >
-                    0{phase.id}
+                    {phase.id < 10 ? `0${phase.id}` : phase.id}
                   </span>
                   <Icon
                     className={`size-3.5 ${isSelected ? 'text-safe' : 'text-muted'}`}
@@ -131,7 +134,7 @@ export const CurriculumView: React.FC = () => {
                     {phase.shortTitle}
                   </h3>
                   <p className="font-mono text-[9px] text-muted mt-0.5">
-                    {phase.id <= 3 ? 'Beginner' : phase.id <= 5 ? 'Core' : 'Advanced'}
+                    {phase.id <= 3 ? 'Beginner' : phase.id <= 6 ? 'Core' : 'Advanced'}
                   </p>
                 </div>
               </button>
@@ -295,6 +298,30 @@ export const CurriculumView: React.FC = () => {
               </button>
             </div>
           </div>
+
+          {activePhase.id === 10 && (
+            <div className="p-6 rounded-2xl border border-safe/30 bg-safe-soft/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div>
+                <span className="font-mono text-[10px] tracking-wider uppercase font-semibold text-safe bg-surface px-2.5 py-0.5 rounded-full border border-safe/25">
+                  FINAL CURRICULUM MILESTONE
+                </span>
+                <h4 className="font-serif text-lg text-ink font-semibold mt-1.5">
+                  Ready for Life Beyond the Curriculum?
+                </h4>
+                <p className="text-xs text-muted mt-0.5">
+                  Explore the week-by-week developer roadmap: identity setup, campus builds, team projects, and specialized tracks.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setView('whats-next')}
+                className="w-full sm:w-auto px-5 py-2.5 rounded-full bg-safe hover:bg-safe/90 text-paper font-mono text-xs font-medium flex items-center justify-center gap-2 transition-colors cursor-pointer shrink-0"
+              >
+                <span>Explore What's Next</span>
+                <ArrowRight className="size-3.5" />
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Right Column: Visual Frame & CLI Examples */}

@@ -96,7 +96,7 @@ export const AssessmentsView: React.FC = () => {
         </h1>
 
         <p className="mt-3 sm:mt-4 max-w-3xl text-xs sm:text-sm md:text-base leading-relaxed text-muted">
-          Validate your architectural and operational understanding across all nine phases. Each response is verified
+          Validate your architectural and operational understanding across all ten phases. Each response is verified
           live with detailed rationales, with zero stress or point deductions.
         </p>
       </section>

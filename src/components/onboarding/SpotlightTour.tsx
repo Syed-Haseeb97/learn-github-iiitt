@@ -18,10 +18,10 @@ const tourSteps: TourStep[] = [
     targetId: 'nav-curriculum',
     view: 'curriculum',
     badge: '01 / 06 • CURRICULUM ROADMAP',
-    title: 'Beginner-Friendly 9-Phase Curriculum',
+    title: 'Beginner-Friendly 10-Phase Curriculum',
     description:
-      'Start your journey here! We break down everything in simple English: what a repository actually is, how to upload code from VS Code, commit history, stars, and contribution graphs—before advancing into team branching, CI/CD, and AI.',
-    tip: 'Tip: You can swipe through all 9 phases at your own pace. Phases 1 to 3 are designed especially for complete beginners.',
+      'Start your journey here! We break down everything in simple English: what a repository actually is, how to upload code from VS Code, commit history, stars, and contribution graphs—before advancing into team branching, CI/CD, AI agents, and open-source workflows.',
+    tip: 'Tip: You can swipe through all 10 phases at your own pace. Phases 1 to 3 are designed especially for complete beginners.',
     position: 'bottom',
   },
   {
