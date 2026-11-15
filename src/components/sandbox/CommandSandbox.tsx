@@ -59,7 +59,7 @@ export const CommandSandbox: React.FC = () => {
   const terminalEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    terminalEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    terminalEndRef.current?.scrollIntoView({ behavior: 'auto' });
   }, [logs]);
 
   const generateSha = () => {
@@ -282,7 +282,7 @@ export const CommandSandbox: React.FC = () => {
   };
 
   return (
-    <div className="space-y-8 sm:space-y-10 animate-in fade-in duration-300">
+    <div className="space-y-8 sm:space-y-10 view-enter">
       {/* Header Banner */}
       <section className="border-b border-line pb-6 sm:pb-8">
         <div className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3.5 py-1 text-xs text-muted shadow-xs mb-3">

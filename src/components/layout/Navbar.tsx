@@ -71,7 +71,7 @@ export const Navbar: React.FC = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-line bg-surface/95 backdrop-blur-md">
+    <header className="sticky top-0 z-40 w-full border-b border-line bg-surface/98 backdrop-blur-xs">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-3 sm:px-6 lg:px-8 py-2.5 sm:py-3 gap-2">
         {/* Left: Brand Identity */}
         <div

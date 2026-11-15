@@ -78,11 +78,14 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
 
   useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-    } catch {
-      // storage unavailable
-    }
+    const timer = setTimeout(() => {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch {
+        // storage unavailable
+      }
+    }, 150);
+    return () => clearTimeout(timer);
   }, [state]);
 
   const triggerToast = (toastData: Omit<ToastMessage, 'id'>) => {
@@ -110,7 +113,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setState((prev) => ({ ...prev, checklistDismissed: true }));
         triggerToast({
           type: 'success',
-          title: '🎉 Onboarding Completed!',
+          title: 'Onboarding Completed!',
           message: 'All 4 milestones verified. Walkthrough checklist is now completed and closed.',
         });
       }, 1200);
@@ -125,7 +128,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       checkAndCelebrateChecklistCompletion(updatedChecklist);
       return { ...prev, currentView: view, checklist: updatedChecklist };
     });
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo(0, 0);
   };
 
   const setActivePhase = (phaseId: number) => {
