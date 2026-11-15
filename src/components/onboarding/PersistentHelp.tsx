@@ -12,8 +12,6 @@ import {
   GraduationCap,
   ExternalLink,
   BookOpen,
-  Terminal,
-  ShieldAlert,
 } from 'lucide-react';
 
 export const PersistentHelp: React.FC = () => {
@@ -161,11 +159,11 @@ export const PersistentHelp: React.FC = () => {
               </button>
             </div>
 
-            {/* Beginner FAQ Section */}
+            {/* FAQ Section */}
             <div className="mt-8 space-y-4">
               <h3 className="font-mono text-xs uppercase tracking-wider font-bold text-ink flex items-center gap-2">
                 <BookOpen className="size-3.5 text-safe" />
-                <span>Frequently Asked Beginner Questions</span>
+                <span>Frequently Asked Questions</span>
               </h3>
 
               <div className="space-y-2">
