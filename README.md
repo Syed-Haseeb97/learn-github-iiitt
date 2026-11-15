@@ -31,9 +31,9 @@ Most university students struggle with Git because traditional tutorials either 
 | **Phase 03** | Commit History & Staging | Staging buffer, DAG diffs, commit hashes, and conventional commit messages. |
 | **Phase 04** | Team Collaboration & PRs | Feature branches, Pull Requests, code review comments, and merge conflict resolution. |
 | **Phase 05** | Git Internals & DAG Architecture | Object database (.git/objects), SHA-1 hashing, Blobs, Trees, Commits, and HEAD refs. |
-| **Phase 06** | The Windows CMD Runbook | PowerShell vs CMD.exe, SSH keys, credential helper, and common terminal pitfalls. |
-| **Phase 07** | CI/CD Pipelines & Security | GitHub Actions, runner environments, least-privilege permissions, and OIDC tokens. |
-| **Phase 08** | AI-Augmented Development | GitHub Copilot CLI, instruction files (.github/copilot-instructions.md), and prompt engineering. |
+| **Phase 06** | CI/CD & GitHub Actions | GitHub Actions automation, runner environments, workflows, jobs, and deployment artifacts. |
+| **Phase 07** | Security & OIDC Federation | Least-privilege permissions, OIDC cloud federation, JWT tokens, and secure secrets management. |
+| **Phase 08** | AI & GitHub Copilot | GitHub Copilot CLI, instruction files (.github/copilot-instructions.md), prompt engineering, and agent loops. |
 | **Phase 09** | Model Context Protocol (MCP) | JSON-RPC 2.0 client-server architecture, STDIO/SSE transports, and GitHub MCP server. |
 | **Phase 10** | The Open-Source Workflow | Forking, upstream remotes (`git remote add upstream`), git stash, merge vs rebase, and SemVer releases. |
 

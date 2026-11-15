@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
+import { phasesData } from '../../data/phases';
+import { assessmentsData } from '../../data/assessments';
 import {
   Compass,
   UserCheck,
@@ -21,10 +23,18 @@ export const WhatsNextView: React.FC = () => {
   const { state, setView } = useApp();
   const [selectedTrack, setSelectedTrack] = useState<'web' | 'ai' | 'core'>('web');
 
-  const isCurriculumFinished = Boolean(
-    state.completedTasks[10] ||
-    Object.keys(state.completedQuizzes).some((k) => k.startsWith('10-'))
-  );
+  const isCurriculumFinished =
+    phasesData.length > 0 &&
+    phasesData.every((phase) => {
+      const assessment = assessmentsData[phase.id];
+      const isTaskDone = Boolean(state.completedTasks[phase.id]);
+      const areQuizzesDone = Boolean(
+        assessment?.mcqs &&
+        assessment.mcqs.length > 0 &&
+        assessment.mcqs.every((_, idx) => Boolean(state.completedQuizzes[`${phase.id}-${idx}`]))
+      );
+      return isTaskDone || areQuizzesDone;
+    });
 
   return (
     <div className="space-y-8 sm:space-y-10 animate-in fade-in duration-300">

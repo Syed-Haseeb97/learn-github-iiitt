@@ -296,7 +296,7 @@ export const AssessmentsView: React.FC = () => {
 
             <div className="p-3.5 rounded-xl bg-paper border border-line font-mono text-xs space-y-2">
               <p className="text-muted font-bold">TASK INSTRUCTION:</p>
-              <p className="text-ink">{phaseAssessment.terminalTask.instruction}</p>
+              <p className="text-ink">{phaseAssessment.terminalTask.prompt || phaseAssessment.terminalTask.scenario}</p>
             </div>
 
             <form onSubmit={handleTaskSubmit} className="space-y-3">

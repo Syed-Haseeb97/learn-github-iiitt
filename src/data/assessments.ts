@@ -412,8 +412,14 @@ export const assessmentsData: Record<number, PhaseAssessment> = {
     "terminalTask": {
       "scenario": "Configure the authoritative upstream remote to synchronize your local fork with the central repository.",
       "prompt": "Add the upstream remote URL https://github.com/Syed-Haseeb97/learn-github-iiitt.git to your local git configuration.",
-      "expected": "git remote add upstream",
+      "expected": "git remote add upstream https://github.com/Syed-Haseeb97/learn-github-iiitt.git",
       "solution": "git remote add upstream https://github.com/Syed-Haseeb97/learn-github-iiitt.git",
+      validate: (input: string) => {
+        const normalized = String(input || '').trim().replace(/\s+/g, ' ').toLowerCase();
+        const expectedWithGit = 'git remote add upstream https://github.com/syed-haseeb97/learn-github-iiitt.git';
+        const expectedWithoutGit = 'git remote add upstream https://github.com/syed-haseeb97/learn-github-iiitt';
+        return normalized === expectedWithGit || normalized === expectedWithoutGit;
+      },
       "hint": "Run 'git remote add upstream https://github.com/Syed-Haseeb97/learn-github-iiitt.git' to link the upstream remote.",
       "successOutput": "Upstream remote configured: https://github.com/Syed-Haseeb97/learn-github-iiitt.git (fetch & push)"
     }
