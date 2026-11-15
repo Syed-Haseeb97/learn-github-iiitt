@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local community roster template (excluded from site build)
+community-roster-template/
+

@@ -1,6 +1,8 @@
 import React from 'react';
 import { GitBranch, ShieldCheck, Heart } from 'lucide-react';
 
+const CURRENT_YEAR = new Date().getFullYear();
+
 export const Footer: React.FC = () => {
   return (
     <footer className="border-t border-line bg-surface mt-16 py-10">
@@ -35,7 +37,7 @@ export const Footer: React.FC = () => {
 
         <div className="mt-8 pt-6 border-t border-line/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted">
           <p>
-            &copy; {new Date().getFullYear()} IIIT Trichy Devs. Built strictly in light mode with editorial typography.
+            &copy; {CURRENT_YEAR} IIIT Trichy Devs. Built strictly in light mode with editorial typography.
           </p>
           <div className="flex items-center gap-3">
             <span className="font-mono text-[11px] text-safe font-semibold">

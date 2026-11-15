@@ -8,6 +8,7 @@ import { UIExplorerView } from './components/uimap/UIExplorerView';
 import { CommandSandbox } from './components/sandbox/CommandSandbox';
 import { AssessmentsView } from './components/assessments/AssessmentsView';
 import { ProjectsLabView } from './components/projects/ProjectsLabView';
+import { WhatsNextView } from './components/roadmap/WhatsNextView';
 import { PersonalizationModal } from './components/onboarding/PersonalizationModal';
 import { SpotlightTour } from './components/onboarding/SpotlightTour';
 import { OnboardingChecklist } from './components/onboarding/OnboardingChecklist';
@@ -23,6 +24,7 @@ const MainContent: React.FC = () => {
       {state.currentView === 'sandbox' && <CommandSandbox />}
       {state.currentView === 'assessments' && <AssessmentsView />}
       {state.currentView === 'projects' && <ProjectsLabView />}
+      {state.currentView === 'whats-next' && <WhatsNextView />}
     </main>
   );
 };

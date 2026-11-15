@@ -9,11 +9,11 @@ import {
   ChevronDown,
   ChevronUp,
   MessageSquare,
+  MessageCircle,
+  MessagesSquare,
   GraduationCap,
   ExternalLink,
   BookOpen,
-  Terminal,
-  ShieldAlert,
 } from 'lucide-react';
 
 export const PersistentHelp: React.FC = () => {
@@ -161,11 +161,11 @@ export const PersistentHelp: React.FC = () => {
               </button>
             </div>
 
-            {/* Beginner FAQ Section */}
+            {/* FAQ Section */}
             <div className="mt-8 space-y-4">
               <h3 className="font-mono text-xs uppercase tracking-wider font-bold text-ink flex items-center gap-2">
                 <BookOpen className="size-3.5 text-safe" />
-                <span>Frequently Asked Beginner Questions</span>
+                <span>Frequently Asked Questions</span>
               </h3>
 
               <div className="space-y-2">
@@ -202,27 +202,41 @@ export const PersistentHelp: React.FC = () => {
               </div>
             </div>
 
-            {/* Campus Community & Mentor Callout */}
-            <div className="mt-8 p-4 rounded-xl border border-safe/30 bg-safe-soft/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            {/* Campus Community Callout */}
+            <div className="mt-8 p-4 rounded-xl border border-safe/30 bg-safe-soft/30 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
               <div className="space-y-1">
                 <div className="flex items-center gap-2 text-safe font-mono text-xs font-bold uppercase tracking-wider">
                   <MessageSquare className="size-3.5" />
                   <span>If you want some help, you can take it here</span>
                 </div>
                 <p className="text-xs text-ink/80 leading-relaxed">
-                  Join the IIIT Trichy Devs Discord & WhatsApp groups to ask questions to seniors and lab assistants directly.
+                  Join the IIIT Trichy Devs WhatsApp group or participate in GitHub Discussions to get help and collaborate on projects.
                 </p>
               </div>
 
-              <a
-                href="https://github.com/Syed-Haseeb97"
-                target="_blank"
-                rel="noreferrer"
-                className="shrink-0 inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-safe text-paper text-xs font-semibold hover:bg-safe/90 cursor-pointer transition-colors shadow-xs"
-              >
-                <span>Ask on GitHub</span>
-                <ExternalLink className="size-3" />
-              </a>
+              <div className="flex items-center gap-2 shrink-0 flex-wrap">
+                <a
+                  href="https://chat.whatsapp.com/G6zb4Eb1uDxKWjJKnbuNj5"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-safe text-paper text-xs font-semibold hover:bg-safe/90 cursor-pointer transition-colors shadow-xs"
+                >
+                  <MessageCircle className="size-3.5" />
+                  <span>Join WhatsApp</span>
+                  <ExternalLink className="size-3" />
+                </a>
+
+                <a
+                  href="https://github.com/orgs/IIIT-Trichy-Devs/discussions"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-line bg-surface text-ink text-xs font-semibold hover:bg-paper cursor-pointer transition-colors shadow-xs"
+                >
+                  <MessagesSquare className="size-3.5 text-safe" />
+                  <span>GitHub Discussions</span>
+                  <ExternalLink className="size-3" />
+                </a>
+              </div>
             </div>
           </div>
         </div>

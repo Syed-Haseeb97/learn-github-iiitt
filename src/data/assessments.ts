@@ -1,4 +1,4 @@
-// 9-Phase Assessments: Quizzes & Terminal Verification
+// 10-Phase Assessments: Quizzes & Terminal Verification
 export interface AssessmentQuestion {
   q: string;
   options: string[];
@@ -369,6 +369,59 @@ export const assessmentsData: Record<number, PhaseAssessment> = {
       "solution": "npx @modelcontextprotocol/inspector",
       "hint": "Type 'npx @modelcontextprotocol/inspector' to run the testing GUI.",
       "successOutput": "MCP Inspector running on http://localhost:5173. Ready to debug tool calls!"
+    }
+  },
+  "10": {
+    "phaseId": 10,
+    "title": "Phase 10: The Open-Source Workflow Verification",
+    "mcqs": [
+      {
+        "q": "What is the primary purpose of adding an 'upstream' remote (git remote add upstream <url>) to your local clone of a fork?",
+        "options": [
+          "It deletes the original author's repository permanently.",
+          "It establishes a tracked connection to the authoritative central repository so you can fetch and merge the latest ongoing updates into your fork.",
+          "It converts your personal GitHub account into a paid enterprise organization.",
+          "It automatically deploys your project to Vercel."
+        ],
+        "correct": 1,
+        "explain": "'upstream' points to the original repository you forked from. Configuring it allows you to run 'git fetch upstream' and keep your fork up to date with ongoing community changes."
+      },
+      {
+        "q": "When is it architectural best practice to use 'git stash' and 'git stash pop'?",
+        "options": [
+          "When you want to permanently delete uncommitted code and reset your repository.",
+          "When you have uncommitted changes in your working tree and need to quickly switch branches or pull upstream changes without creating messy work-in-progress commits.",
+          "When you are ready to publish your final release tag to production.",
+          "When running CI/CD runners on GitHub Actions."
+        ],
+        "correct": 1,
+        "explain": "'git stash' safely shelves your modified, tracked files onto a temporary stack so your working tree is clean. 'git stash pop' restores them when you return."
+      },
+      {
+        "q": "According to Semantic Versioning (SemVer: MAJOR.MINOR.PATCH), what does incrementing from v1.4.2 to v2.0.0 signify?",
+        "options": [
+          "A minor backward-compatible bug fix.",
+          "A breaking API or architectural change that is not backward compatible.",
+          "A cosmetic change to the repository README.",
+          "A scheduled weekly automated release."
+        ],
+        "correct": 1,
+        "explain": "Under Semantic Versioning (MAJOR.MINOR.PATCH), incrementing the MAJOR number indicates breaking changes requiring downstream users to adapt their code."
+      }
+    ],
+    "terminalTask": {
+      "scenario": "Configure the authoritative upstream remote to synchronize your local fork with the central repository.",
+      "prompt": "Add the upstream remote URL https://github.com/Syed-Haseeb97/learn-github-iiitt.git to your local git configuration.",
+      "expected": "git remote add upstream https://github.com/Syed-Haseeb97/learn-github-iiitt.git",
+      "solution": "git remote add upstream https://github.com/Syed-Haseeb97/learn-github-iiitt.git",
+      validate: (input: string) => {
+        const normalized = String(input || '').trim().replace(/\s+/g, ' ').toLowerCase();
+        const expectedWithGit = 'git remote add upstream https://github.com/syed-haseeb97/learn-github-iiitt.git';
+        const expectedWithoutGit = 'git remote add upstream https://github.com/syed-haseeb97/learn-github-iiitt';
+        return normalized === expectedWithGit || normalized === expectedWithoutGit;
+      },
+      "hint": "Run 'git remote add upstream https://github.com/Syed-Haseeb97/learn-github-iiitt.git' to link the upstream remote.",
+      "successOutput": "Upstream remote configured: https://github.com/Syed-Haseeb97/learn-github-iiitt.git (fetch & push)"
     }
   }
 };

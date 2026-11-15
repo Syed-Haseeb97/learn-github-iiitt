@@ -96,7 +96,7 @@ export const AssessmentsView: React.FC = () => {
         </h1>
 
         <p className="mt-3 sm:mt-4 max-w-3xl text-xs sm:text-sm md:text-base leading-relaxed text-muted">
-          Validate your architectural and operational understanding across all nine phases. Each response is verified
+          Validate your architectural and operational understanding across all ten phases. Each response is verified
           live with detailed rationales, with zero stress or point deductions.
         </p>
       </section>
@@ -296,7 +296,7 @@ export const AssessmentsView: React.FC = () => {
 
             <div className="p-3.5 rounded-xl bg-paper border border-line font-mono text-xs space-y-2">
               <p className="text-muted font-bold">TASK INSTRUCTION:</p>
-              <p className="text-ink">{phaseAssessment.terminalTask.instruction}</p>
+              <p className="text-ink">{phaseAssessment.terminalTask.prompt || phaseAssessment.terminalTask.scenario}</p>
             </div>
 
             <form onSubmit={handleTaskSubmit} className="space-y-3">

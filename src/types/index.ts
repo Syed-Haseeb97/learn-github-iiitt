@@ -3,7 +3,8 @@ export type ViewMode =
   | 'uimap'
   | 'sandbox'
   | 'assessments'
-  | 'projects';
+  | 'projects'
+  | 'whats-next';
 
 export interface UserProfile {
   experience: 'beginner' | 'intermediate' | 'advanced';

@@ -1,4 +1,4 @@
-// 9-Phase Progressive Architectural Continuum from Git & GitHub Beginners to MCP
+// 10-Phase Progressive Architectural Continuum from Git & GitHub Beginners to Open Source & MCP
 export interface PhaseSection {
   heading: string;
   content?: string;
@@ -538,6 +538,95 @@ export const phasesData: Phase[] = [
       {
         "cmd": "curl -H 'Content-Type: application/json' <endpoint>",
         "use": "Tests JSON-RPC 2.0 endpoint connectivity for remote HTTP/SSE MCP servers."
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "code": "PHASE 10",
+    "shortTitle": "The Open-Source Workflow",
+    "title": "The Open-Source Workflow: Forks, Upstream Sync, and Release Governance",
+    "subtitle": "Fork Topologies, Upstream Remote Tracking, Shelving Changes with Git Stash, Merge vs Rebase, Issues & Semantic Versioning Releases",
+    "image": "/images/phase-4.jpg",
+    "imageCaption": "FIG 10.1 — THE OPEN-SOURCE ECOSYSTEM: UPSTREAM SYNCHRONIZATION, SHELVING, REBASING & RELEASES",
+    "analogyTitle": "The Public Library & Personal Notebook Analogy",
+    "analogyText": "Imagine an authoritative encyclopedia in the college central library (the upstream repository). As a student, you cannot scribble your notes directly on the library's master copy. Instead, you photocopy the book to your personal desk (a fork). When the librarians release revised chapters, you update your personal copy with a fast delivery slip (upstream sync). And when your study session is suddenly interrupted by another urgent task, you slip a bookmark in and set your draft notes in a drawer (git stash) until you are ready to resume!",
+    "technicalTerms": [
+      {
+        "term": "Upstream Remote",
+        "plain": "The original authoritative repository from which you created your fork, tracked locally via 'git remote add upstream <url>' to pull ongoing changes."
+      },
+      {
+        "term": "git stash",
+        "plain": "A temporary shelf that safely saves uncommitted modifications without making a formal commit, letting you switch branches with a clean working directory."
+      },
+      {
+        "term": "Merge vs Rebase",
+        "plain": "'git merge' creates a merge commit preserving historical branches; 'git rebase' rewrites commit history onto the tip of another branch for a clean, linear timeline."
+      },
+      {
+        "term": "Semantic Versioning (SemVer)",
+        "plain": "A standard version numbering system: MAJOR.MINOR.PATCH (e.g., v2.1.0) indicating breaking changes, new features, and bug fixes."
+      },
+      {
+        "term": "Good First Issue",
+        "plain": "A curated GitHub issue label marking well-scoped tasks ideal for newcomers making their first contribution."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "10.1 Forks vs Clones and Keeping in Sync with Upstream",
+        "body": "When contributing to open-source or community repositories where you do not possess direct push permissions, the standard workflow begins with a Fork. A fork creates an independent, server-side copy of the project under your own GitHub account. Once cloned locally, your laptop is linked to your personal fork (designated as 'origin'). To incorporate updates from the central project, you configure a second remote called 'upstream' pointing to the authoritative repo. Regularly running 'git fetch upstream' and merging or rebasing against 'upstream/main' ensures your branch never diverges into irreconcilable merge conflicts."
+      },
+      {
+        "heading": "10.2 Shelving In-Progress Work with git stash and stash pop",
+        "body": "Often, you are halfway through editing files on a feature branch when an urgent bug arises or you need to pull latest changes from upstream. Git prevents switching branches if uncommitted changes would be overwritten. Instead of making sloppy 'wip' (work-in-progress) commits, use 'git stash'. Stashing takes your uncommitted modifications (both staged and unstaged) and saves them onto an internal stack, returning your working directory to a clean HEAD state. Once your urgent task or sync is complete, run 'git stash pop' to reapply your shelved modifications exactly where you left off."
+      },
+      {
+        "heading": "10.3 Merge vs Rebase: Understanding Linear History vs Preserved Topology",
+        "body": "When bringing your feature branch in sync with main, you face an architectural choice: Merge or Rebase. 'git merge' is non-destructive: it joins the two branch tips by creating a dedicated 'merge commit', preserving the exact branching topology and timeline. Conversely, 'git rebase' takes all commits on your current feature branch and replays them one by one on top of the latest commit of the target branch. Rebase produces a clean, perfectly linear commit history without merge bubbles. Rule of thumb: never rebase public shared branches that others are actively working on; use rebase on local personal feature branches before submitting a Pull Request."
+      },
+      {
+        "heading": "10.4 GitHub Issues, Labels, Good First Issues & Project Kanban Boards",
+        "body": "Healthy open-source collaboration centers around GitHub Issues. Issues track bugs, feature requests, and architectural discussions. Maintainers categorize issues using colored labels: 'bug' (defects), 'enhancement' (new features), 'documentation' (guides and READMEs), and 'good first issue' (introductory tasks curated for newcomers). GitHub Projects adds Kanban boards (To Do, In Progress, Done) directly integrated with issues and pull requests, giving engineering teams complete visibility into sprint milestones."
+      },
+      {
+        "heading": "10.5 Semantic Versioning, Git Tags, and Official GitHub Releases",
+        "body": "Software releases must be predictable. Industry teams follow Semantic Versioning (SemVer: MAJOR.MINOR.PATCH). A MAJOR increment (e.g. 2.0.0) indicates breaking API changes; MINOR (e.g. 1.2.0) introduces backward-compatible functionality; PATCH (e.g. 1.1.3) delivers backward-compatible bug fixes. In Git, milestones are pinned using annotated tags ('git tag -a v1.0.0 -m \"Release v1.0.0\"'). Pushing tags to GitHub enables creating an official Release, bundling downloadable build artifacts (binaries, zip files) and generating automated changelog release notes."
+      }
+    ],
+    "commandsTable": [
+      {
+        "cmd": "git remote add upstream <url>",
+        "use": "Registers the original authoritative community repository as an upstream remote."
+      },
+      {
+        "cmd": "git fetch upstream",
+        "use": "Downloads all branches and commits from the upstream repository without altering local files."
+      },
+      {
+        "cmd": "git merge upstream/main",
+        "use": "Merges changes from the upstream main branch into your current active branch."
+      },
+      {
+        "cmd": "git rebase upstream/main",
+        "use": "Replays your local branch commits on top of upstream main for a clean linear history."
+      },
+      {
+        "cmd": "git stash",
+        "use": "Shelves modified, tracked files into a temporary stack, restoring a clean working tree."
+      },
+      {
+        "cmd": "git stash pop",
+        "use": "Restores the most recently stashed changes back into your working directory."
+      },
+      {
+        "cmd": "git tag -a v1.0.0 -m 'Release v1.0.0'",
+        "use": "Creates an annotated Git tag with a release message at the current commit."
+      },
+      {
+        "cmd": "git push origin --tags",
+        "use": "Pushes all locally created Git tags to the remote repository on GitHub."
       }
     ]
   }
