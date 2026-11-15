@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --color-paper: #F5F3EE;
+  --color-surface: #FFFFFF;
+  --color-ink: #16181D;
+  --color-muted: #5F626A;
+  --color-line: #C8C2B5;
+  --color-safe: #1D6B52;
+  --color-safe-soft: #E3EFE8;
+  --color-warn: #86560D;
+  --color-warn-soft: #F6ECD9;
+  --color-risk: #B53A26;
+  --color-risk-soft: #F8E9E4;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #F5F3EE;
+  color: #16181D;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background-color: #F5F3EE;
+  color: #16181D;
+  font-family: 'Geist', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background-color: #E3EFE8;
+  color: #16181D;
+}
+
+@layer components {
+  .editorial-card {
+    background-color: #FFFFFF;
+    border: 1px solid #C8C2B5;
+    border-radius: 1rem;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .mono-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    border-radius: 9999px;
+    border: 1px solid #C8C2B5;
+    background-color: #FFFFFF;
+    padding: 0.2rem 0.75rem;
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+}
+
+/* Custom crisp scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F5F3EE;
+}
+::-webkit-scrollbar-thumb {
+  background: #C8C2B5;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #5F626A;
+}
+
+/* Utilities to hide scrollbars while maintaining scroll functionality */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
