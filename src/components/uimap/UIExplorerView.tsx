@@ -42,10 +42,10 @@ export const UIExplorerView: React.FC = () => {
   };
 
   return (
-    <div className="space-y-8 sm:space-y-10 animate-in fade-in duration-300">
+    <div className="space-y-8 sm:space-y-10 view-enter">
       {/* Header Banner */}
       <section className="border-b border-line pb-6 sm:pb-8">
-        <div className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3.5 py-1 text-xs text-muted shadow-xs mb-3">
+        <div className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3.5 py-1 text-xs text-muted shadow-sm mb-3">
           <span className="font-mono text-[10px] sm:text-[11px] tracking-wider uppercase font-semibold text-safe">
             SURFACE ANATOMY • GITHUB.COM REPOSITORY
           </span>
@@ -221,7 +221,7 @@ export const UIExplorerView: React.FC = () => {
                       handleSelect(uiHotspotsData[8]);
                       setShowClonePopup(!showClonePopup);
                     }}
-                    className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold cursor-pointer transition-all shadow-xs ${
+                    className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold cursor-pointer transition-all shadow-sm ${
                       selectedHotspot.id === 9
                         ? 'bg-safe text-paper ring-3 ring-safe/30'
                         : 'bg-[#1D6B52] text-paper hover:bg-[#165641]'

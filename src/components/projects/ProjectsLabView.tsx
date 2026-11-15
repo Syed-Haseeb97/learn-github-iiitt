@@ -52,10 +52,10 @@ export const ProjectsLabView: React.FC = () => {
     : null;
 
   return (
-    <div className="space-y-8 sm:space-y-10 animate-in fade-in duration-300">
+    <div className="space-y-8 sm:space-y-10 view-enter">
       {/* Header Banner */}
       <section className="border-b border-line pb-6 sm:pb-8">
-        <div className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3.5 py-1 text-xs text-muted shadow-xs mb-3">
+        <div className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3.5 py-1 text-xs text-muted shadow-sm mb-3">
           <span className="font-mono text-[10px] sm:text-[11px] tracking-wider uppercase font-semibold text-safe">
             APPLIED REPOSITORIES • IIIT TRICHY CAMPUS BUILDS
           </span>
@@ -107,7 +107,7 @@ export const ProjectsLabView: React.FC = () => {
               onClick={() => setCategoryFilter(cat.id as typeof categoryFilter)}
               className={`px-3 py-1 rounded-full cursor-pointer whitespace-nowrap transition-colors ${
                 categoryFilter === cat.id
-                  ? 'bg-surface text-ink font-bold shadow-xs'
+                  ? 'bg-surface text-ink font-bold shadow-sm'
                   : 'text-muted hover:text-ink'
               }`}
             >
@@ -148,7 +148,7 @@ export const ProjectsLabView: React.FC = () => {
                   setSearchQuery('');
                   setCategoryFilter('all');
                 }}
-                className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-ink text-paper text-xs font-semibold hover:bg-ink/90 cursor-pointer shadow-xs transition-transform active:scale-95"
+                className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-ink text-paper text-xs font-semibold hover:bg-ink/90 cursor-pointer shadow-sm transition-transform active:scale-95"
               >
                 <span>Clear Filters & Reset</span>
                 <ArrowRight className="size-3.5" />
@@ -253,7 +253,7 @@ export const ProjectsLabView: React.FC = () => {
 
                 {/* File Code Display Box */}
                 {currentFile && (
-                  <div className="rounded-xl border border-line overflow-hidden bg-white shadow-xs">
+                  <div className="rounded-xl border border-line overflow-hidden bg-white shadow-sm">
                     <div className="bg-paper px-3 sm:px-4 py-2 border-b border-line flex items-center justify-between text-xs font-mono">
                       <span className="text-ink font-bold truncate max-w-xs">
                         {currentFile.name}

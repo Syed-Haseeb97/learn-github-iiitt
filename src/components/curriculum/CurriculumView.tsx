@@ -68,10 +68,10 @@ export const CurriculumView: React.FC = () => {
   };
 
   return (
-    <div className="space-y-10 animate-in fade-in duration-300">
+    <div className="space-y-10 view-enter">
       {/* Top Hero: Editorial Manifesto Banner */}
       <section className="border-b border-line pb-8">
-        <div className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-1.5 text-xs text-muted shadow-xs mb-4">
+        <div className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-1.5 text-xs text-muted shadow-sm mb-4">
           <span className="font-mono text-[11px] tracking-wider uppercase font-semibold text-safe">
             THE ARCHITECTURAL CONTINUUM • IIIT TRICHY
           </span>
@@ -341,7 +341,9 @@ export const CurriculumView: React.FC = () => {
               <img
                 src={activePhase.image}
                 alt={activePhase.title}
-                className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                loading="eager"
+                decoding="async"
+                className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
               />
             </div>
 
