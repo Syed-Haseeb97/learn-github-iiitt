@@ -51,7 +51,7 @@ export const projectsLabData: ProjectBlueprint[] = [
           }
         ],
         steps: [
-          'Click the **Fork** button at the top-right of `github.com/iiitt-devs/community-roster` to create a server-side clone under your username.',
+          'Click the **Fork** button at the top-right of `github.com/IIIT-Trichy-Devs/community-roster` to create a server-side clone under your username.',
           'Run `git clone https://github.com/<your-username>/community-roster.git` in Windows CMD.',
           'Create a dedicated branch: `git checkout -b add-my-profile`.',
           'Stage, commit, push to your fork (`git push origin add-my-profile`), and click **Compare & pull request** on GitHub!'
