@@ -410,12 +410,12 @@ export const assessmentsData: Record<number, PhaseAssessment> = {
       }
     ],
     "terminalTask": {
-      "scenario": "Configure the official IIIT-Trichy-Devs upstream remote to synchronize your local fork with the central repository.",
-      "prompt": "Add the upstream remote URL https://github.com/IIIT-Trichy-Devs/learn-github-iiitt.git to your local git configuration.",
+      "scenario": "Configure the authoritative upstream remote to synchronize your local fork with the central repository.",
+      "prompt": "Add the upstream remote URL https://github.com/Syed-Haseeb97/learn-github-iiitt.git to your local git configuration.",
       "expected": "git remote add upstream",
-      "solution": "git remote add upstream https://github.com/IIIT-Trichy-Devs/learn-github-iiitt.git",
-      "hint": "Run 'git remote add upstream https://github.com/IIIT-Trichy-Devs/learn-github-iiitt.git' to link the upstream remote.",
-      "successOutput": "Upstream remote configured: https://github.com/IIIT-Trichy-Devs/learn-github-iiitt.git (fetch & push)"
+      "solution": "git remote add upstream https://github.com/Syed-Haseeb97/learn-github-iiitt.git",
+      "hint": "Run 'git remote add upstream https://github.com/Syed-Haseeb97/learn-github-iiitt.git' to link the upstream remote.",
+      "successOutput": "Upstream remote configured: https://github.com/Syed-Haseeb97/learn-github-iiitt.git (fetch & push)"
     }
   }
 };

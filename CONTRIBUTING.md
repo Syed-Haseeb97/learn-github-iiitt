@@ -16,7 +16,7 @@ Thank you for your interest in improving the Git & GitHub learning platform for 
 ## Step-by-Step Contribution Workflow
 
 ### 1. Fork & Clone
-1. Fork `https://github.com/IIIT-Trichy-Devs/learn-github-iiitt` to your GitHub account.
+1. Fork `https://github.com/Syed-Haseeb97/learn-github-iiitt` to your GitHub account.
 2. Clone your personal fork locally:
    ```bash
    git clone https://github.com/<your-username>/learn-github-iiitt.git
@@ -24,7 +24,7 @@ Thank you for your interest in improving the Git & GitHub learning platform for 
    ```
 3. Configure the upstream remote to sync with the main community repository:
    ```bash
-   git remote add upstream https://github.com/IIIT-Trichy-Devs/learn-github-iiitt.git
+   git remote add upstream https://github.com/Syed-Haseeb97/learn-github-iiitt.git
    git remote -v
    ```
 
@@ -89,7 +89,7 @@ Both `npm run lint` and `npm run build` must pass with **0 errors**.
    ```bash
    git push -u origin feat/your-branch-name
    ```
-2. Navigate to `https://github.com/IIIT-Trichy-Devs/learn-github-iiitt` and click **Compare & pull request**.
+2. Navigate to `https://github.com/Syed-Haseeb97/learn-github-iiitt` and click **Compare & pull request**.
 3. Fill out the pull request template completely, detailing:
    - Summary of changes
    - Related issue number (e.g. `Closes #12`)

@@ -70,7 +70,7 @@ Most university students struggle with Git because traditional tutorials either 
 ### Setup Commands
 ```bash
 # Clone the repository
-git clone https://github.com/IIIT-Trichy-Devs/learn-github-iiitt.git
+git clone https://github.com/Syed-Haseeb97/learn-github-iiitt.git
 cd learn-github-iiitt
 
 # Install dependencies
@@ -99,7 +99,7 @@ We welcome contributions from all IIIT Trichy students and alumni!
 2. Fork the repository on GitHub.
 3. Add the upstream remote:
    ```bash
-   git remote add upstream https://github.com/IIIT-Trichy-Devs/learn-github-iiitt.git
+   git remote add upstream https://github.com/Syed-Haseeb97/learn-github-iiitt.git
    ```
 4. Create a descriptive feature branch:
    ```bash

@@ -270,7 +270,7 @@ export const WhatsNextView: React.FC = () => {
                   <span>Start with Community Repos</span>
                 </div>
                 <p className="text-xs text-muted leading-relaxed">
-                  Contribute directly to IIIT-Trichy-Devs repositories, including `learn-github-iiitt` or `community-roster`.
+                  Contribute directly to community repositories, including `Syed-Haseeb97/learn-github-iiitt` or `community-roster`.
                 </p>
               </div>
 

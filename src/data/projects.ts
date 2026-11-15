@@ -141,9 +141,9 @@ export const projectsLabData: ProjectBlueprint[] = [
           }
         ],
         steps: [
-          'Locate an open issue with the label `good first issue` or `documentation` in community repositories like `IIIT-Trichy-Devs/learn-github-iiitt` or `IIIT-Trichy-Devs/community-roster`.',
+          'Locate an open issue with the label `good first issue` or `documentation` in community repositories like `Syed-Haseeb97/learn-github-iiitt` or `IIIT-Trichy-Devs/community-roster`.',
           'Click the **Fork** button on GitHub to create your own server-side copy of the repository.',
-          'Clone your fork locally and connect the upstream repository: `git remote add upstream https://github.com/IIIT-Trichy-Devs/learn-github-iiitt.git`. Verify with `git remote -v`.',
+          'Clone your fork locally and connect the upstream repository: `git remote add upstream https://github.com/Syed-Haseeb97/learn-github-iiitt.git`. Verify with `git remote -v`.',
           'Create a dedicated topic branch: `git checkout -b fix/update-phase-10-links`.',
           'Implement your fix or documentation enhancement, verify it compiles cleanly (`npm run build`), and commit with conventional messages: `fix(docs): update upstream remote command explanation`.',
           'Push the branch to your fork (`git push -u origin fix/update-phase-10-links`) and open a Pull Request against the upstream community repository.',
