@@ -285,7 +285,7 @@ export const CommandSandbox: React.FC = () => {
     <div className="space-y-8 sm:space-y-10 view-enter">
       {/* Header Banner */}
       <section className="border-b border-line pb-6 sm:pb-8">
-        <div className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3.5 py-1 text-xs text-muted shadow-xs mb-3">
+        <div className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3.5 py-1 text-xs text-muted shadow-sm mb-3">
           <span className="font-mono text-[10px] sm:text-[11px] tracking-wider uppercase font-semibold text-safe">
             LIVE KERNEL SIMULATION • SHA-1 OBJECT GRAPH
           </span>

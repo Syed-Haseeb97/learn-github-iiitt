@@ -167,7 +167,7 @@ export const UploadMethodsInteractiveGuide: React.FC = () => {
               onClick={() => setActiveTab(tab.id as typeof activeTab)}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono transition-all cursor-pointer ${
                 isSelected
-                  ? 'bg-ink text-paper font-semibold shadow-xs'
+                  ? 'bg-ink text-paper font-semibold shadow-sm'
                   : 'bg-paper text-muted border border-line hover:bg-surface hover:text-ink'
               }`}
             >
@@ -185,7 +185,7 @@ export const UploadMethodsInteractiveGuide: React.FC = () => {
             The industry standard way. You write code in VS Code, open the integrated terminal (<kbd className="bg-paper border border-line px-1.5 py-0.5 rounded font-mono text-[10px]">Ctrl + ~</kbd>), and run these 5 commands:
           </p>
 
-          <div className="rounded-xl border border-ink bg-white overflow-hidden font-mono text-xs shadow-xs">
+          <div className="rounded-xl border border-ink bg-white overflow-hidden font-mono text-xs shadow-sm">
             <div className="bg-paper px-4 py-2 border-b border-line flex items-center justify-between text-muted text-[11px]">
               <span>WINDOWS POWERSHELL / CMD</span>
               <span>PORTAL PROJECT</span>
@@ -343,7 +343,7 @@ export const CommitDiffExplorer: React.FC = () => {
       </div>
 
       {/* Line-by-Line Diff Viewer Mockup */}
-      <div className="rounded-xl border border-ink bg-white overflow-hidden shadow-xs">
+      <div className="rounded-xl border border-ink bg-white overflow-hidden shadow-sm">
         <div className="bg-paper px-4 py-2 border-b border-line flex items-center justify-between text-xs font-mono text-muted">
           <span>DIFF &bull; STUDENT_CALCULATOR.JS</span>
           <span className="text-safe font-semibold">+2 additions, -1 deletion</span>
@@ -611,7 +611,7 @@ export const GitIgnoreInteractiveGuide: React.FC = () => {
                 onClick={() => setActiveTemplate(t.id as typeof activeTemplate)}
                 className={`px-3 py-1 rounded-full cursor-pointer transition-colors ${
                   activeTemplate === t.id
-                    ? 'bg-surface text-ink font-bold shadow-xs'
+                    ? 'bg-surface text-ink font-bold shadow-sm'
                     : 'text-muted hover:text-ink'
                 }`}
               >
@@ -622,7 +622,7 @@ export const GitIgnoreInteractiveGuide: React.FC = () => {
         </div>
 
         {/* Template Code Preview Box */}
-        <div className="rounded-xl border border-line bg-white overflow-hidden shadow-xs">
+        <div className="rounded-xl border border-line bg-white overflow-hidden shadow-sm">
           <div className="bg-paper px-4 py-2 border-b border-line flex items-center justify-between text-xs font-mono">
             <span className="text-muted font-bold">.gitignore ({activeTemplate.toUpperCase()})</span>
             <button

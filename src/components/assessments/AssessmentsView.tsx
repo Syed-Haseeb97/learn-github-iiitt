@@ -84,7 +84,7 @@ export const AssessmentsView: React.FC = () => {
     <div className="space-y-8 sm:space-y-10 view-enter">
       {/* Header Banner */}
       <section className="border-b border-line pb-6 sm:pb-8">
-        <div className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3.5 py-1 text-xs text-muted shadow-xs mb-3">
+        <div className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3.5 py-1 text-xs text-muted shadow-sm mb-3">
           <span className="font-mono text-[10px] sm:text-[11px] tracking-wider uppercase font-semibold text-safe">
             KNOWLEDGE VERIFICATION • QUIZZES & TERMINAL TASKS
           </span>
@@ -118,7 +118,7 @@ export const AssessmentsView: React.FC = () => {
               }}
               className={`flex items-center gap-1.5 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs font-mono font-medium transition-all cursor-pointer whitespace-nowrap shrink-0 ${
                 isSelected
-                  ? 'bg-ink text-paper font-semibold shadow-xs'
+                  ? 'bg-ink text-paper font-semibold shadow-sm'
                   : 'bg-surface text-muted border border-line hover:bg-paper hover:text-ink'
               }`}
             >
@@ -145,7 +145,7 @@ export const AssessmentsView: React.FC = () => {
                 type="button"
                 onClick={() => setFilterMode('all')}
                 className={`px-2.5 py-0.5 rounded-full cursor-pointer transition-colors ${
-                  filterMode === 'all' ? 'bg-surface text-ink font-bold shadow-xs' : 'text-muted hover:text-ink'
+                  filterMode === 'all' ? 'bg-surface text-ink font-bold shadow-sm' : 'text-muted hover:text-ink'
                 }`}
               >
                 All ({quizList.length})
@@ -154,7 +154,7 @@ export const AssessmentsView: React.FC = () => {
                 type="button"
                 onClick={() => setFilterMode('verified')}
                 className={`px-2.5 py-0.5 rounded-full cursor-pointer transition-colors ${
-                  filterMode === 'verified' ? 'bg-surface text-safe font-bold shadow-xs' : 'text-muted hover:text-ink'
+                  filterMode === 'verified' ? 'bg-surface text-safe font-bold shadow-sm' : 'text-muted hover:text-ink'
                 }`}
               >
                 Verified ({totalVerifiedInPhase})
@@ -163,7 +163,7 @@ export const AssessmentsView: React.FC = () => {
                 type="button"
                 onClick={() => setFilterMode('pending')}
                 className={`px-2.5 py-0.5 rounded-full cursor-pointer transition-colors ${
-                  filterMode === 'pending' ? 'bg-surface text-warn font-bold shadow-xs' : 'text-muted hover:text-ink'
+                  filterMode === 'pending' ? 'bg-surface text-warn font-bold shadow-sm' : 'text-muted hover:text-ink'
                 }`}
               >
                 Pending ({quizList.length - totalVerifiedInPhase})
@@ -190,7 +190,7 @@ export const AssessmentsView: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setFilterMode('all')}
-                className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-ink text-paper text-xs font-semibold hover:bg-ink/90 cursor-pointer shadow-xs transition-transform active:scale-95"
+                className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-ink text-paper text-xs font-semibold hover:bg-ink/90 cursor-pointer shadow-sm transition-transform active:scale-95"
               >
                 <span>View All Questions</span>
                 <ArrowRight className="size-3.5" />

@@ -73,7 +73,7 @@ export const PersistentHelp: React.FC = () => {
 
       {/* Help Modal / Slideout */}
       {state.helpCenterOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/50 backdrop-blur-xs animate-in fade-in duration-200">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/50 backdrop-blur-sm animate-in fade-in duration-200">
           <div className="relative w-full max-w-2xl editorial-card bg-surface p-6 sm:p-8 shadow-2xl border border-line animate-in zoom-in-95 duration-200 max-h-[88vh] overflow-y-auto">
             {/* Close Button */}
             <button
@@ -219,7 +219,7 @@ export const PersistentHelp: React.FC = () => {
                   href="https://chat.whatsapp.com/G6zb4Eb1uDxKWjJKnbuNj5"
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-safe text-paper text-xs font-semibold hover:bg-safe/90 cursor-pointer transition-colors shadow-xs"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-safe text-paper text-xs font-semibold hover:bg-safe/90 cursor-pointer transition-colors shadow-sm"
                 >
                   <MessageCircle className="size-3.5" />
                   <span>Join WhatsApp</span>
@@ -230,7 +230,7 @@ export const PersistentHelp: React.FC = () => {
                   href="https://github.com/orgs/IIIT-Trichy-Devs/discussions"
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-line bg-surface text-ink text-xs font-semibold hover:bg-paper cursor-pointer transition-colors shadow-xs"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-line bg-surface text-ink text-xs font-semibold hover:bg-paper cursor-pointer transition-colors shadow-sm"
                 >
                   <MessagesSquare className="size-3.5 text-safe" />
                   <span>GitHub Discussions</span>

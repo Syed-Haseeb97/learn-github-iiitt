@@ -383,7 +383,7 @@ export const GithubMcpConnectorGuide: React.FC = () => {
               </button>
             </div>
 
-            <pre className="p-4 rounded-xl border border-line bg-white font-mono text-xs text-ink overflow-x-auto leading-relaxed shadow-xs">
+            <pre className="p-4 rounded-xl border border-line bg-white font-mono text-xs text-ink overflow-x-auto leading-relaxed shadow-sm">
               <code>{currentTool.configJson}</code>
             </pre>
           </div>

@@ -71,14 +71,14 @@ export const Navbar: React.FC = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-line bg-surface/98 backdrop-blur-xs">
+    <header className="sticky top-0 z-40 w-full border-b border-line bg-surface/95 backdrop-blur-sm">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-3 sm:px-6 lg:px-8 py-2.5 sm:py-3 gap-2">
         {/* Left: Brand Identity */}
         <div
           onClick={() => setView('curriculum')}
           className="flex items-center gap-2.5 sm:gap-3 cursor-pointer group shrink-0"
         >
-          <div className="flex size-9 sm:size-10 items-center justify-center rounded-xl border border-line bg-paper text-safe shadow-xs group-hover:border-safe transition-colors">
+          <div className="flex size-9 sm:size-10 items-center justify-center rounded-xl border border-line bg-paper text-safe shadow-sm group-hover:border-safe transition-colors">
             <GraduationCap className="size-4 sm:size-5" />
           </div>
           <div>
@@ -115,7 +115,7 @@ export const Navbar: React.FC = () => {
                 onClick={() => setView(item.id)}
                 className={`flex items-center gap-1.5 px-2.5 lg:px-3.5 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer whitespace-nowrap shrink-0 ${
                   isActive
-                    ? 'bg-surface text-ink border border-line shadow-xs font-semibold'
+                    ? 'bg-surface text-ink border border-line shadow-sm font-semibold'
                     : 'text-muted hover:text-ink hover:bg-surface/50'
                 }`}
               >

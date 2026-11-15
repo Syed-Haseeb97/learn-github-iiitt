@@ -29,7 +29,7 @@ export const PersonalizationModal: React.FC = () => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/50 backdrop-blur-xs animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/50 backdrop-blur-sm animate-in fade-in duration-200">
       <div className="relative w-full max-w-xl editorial-card bg-surface p-6 sm:p-8 shadow-2xl border border-line animate-in zoom-in-95 duration-200 max-h-[90vh] overflow-y-auto">
         {/* Close Button if profile already exists */}
         {state.userProfile && (
