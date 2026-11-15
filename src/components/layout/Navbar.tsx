@@ -12,6 +12,7 @@ import {
   GraduationCap,
   Sparkles,
   HelpCircle,
+  Compass,
 } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
@@ -59,6 +60,13 @@ export const Navbar: React.FC = () => {
       label: 'Student Projects',
       shortLabel: 'Projects',
       icon: FolderGit2,
+    },
+    {
+      id: 'whats-next',
+      navId: 'nav-whats-next',
+      label: "What's Next",
+      shortLabel: 'Roadmap',
+      icon: Compass,
     },
   ];
 
