@@ -1,5 +1,13 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import type { ViewMode, AppState, UserProfile, OnboardingChecklistState, ToastMessage } from '../types';
+import type {
+  ViewMode,
+  AppState,
+  UserProfile,
+  StudentIdentity,
+  OnboardingChecklistState,
+  ToastMessage,
+} from '../types';
+import { telemetry, type ProgressStats } from '../services/telemetry';
 
 interface AppContextType {
   state: AppState;
@@ -9,6 +17,8 @@ interface AppContextType {
   recordTaskComplete: (phaseId: number) => void;
   setUserProfile: (profile: UserProfile) => void;
   setPersonalizationOpen: (open: boolean) => void;
+  setStudentIdentity: (identity: StudentIdentity) => void;
+  setIdentityModalOpen: (open: boolean) => void;
   startTour: () => void;
   nextTourStep: () => void;
   prevTourStep: () => void;
@@ -38,6 +48,8 @@ const defaultState: AppState = {
   completedQuizzes: {},
   completedTasks: {},
   userProfile: null,
+  studentIdentity: null,
+  identityModalOpen: false,
   tourCompleted: false,
   tourActive: false,
   tourStep: 0,
@@ -56,14 +68,22 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
+        const hasIdentity = Boolean(
+          parsed.studentIdentity?.name && parsed.studentIdentity?.githubUsername
+        );
+        const isExistingUser = Boolean(parsed.userProfile || parsed.tourCompleted);
+
         return {
           ...defaultState,
           ...parsed,
           checklist: { ...defaultChecklist, ...(parsed.checklist || {}) },
+          studentIdentity: parsed.studentIdentity || null,
           // Don't persist tourActive or modals as open across reloads
           tourActive: false,
           helpCenterOpen: false,
           personalizationOpen: !parsed.userProfile,
+          // If they are an existing visitor who hasn't provided name/github username yet, prompt them immediately
+          identityModalOpen: !hasIdentity && isExistingUser,
         };
       }
     } catch {
@@ -72,11 +92,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return {
       ...defaultState,
       personalizationOpen: true, // First-time visitor gets personalization prompt
+      identityModalOpen: false, // New visitor finishes tour first before identity prompt
     };
   });
 
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
 
+  // Debounced persistence to avoid layout stutter
   useEffect(() => {
     const timer = setTimeout(() => {
       try {
@@ -87,6 +109,44 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }, 150);
     return () => clearTimeout(timer);
   }, [state]);
+
+  const getProgressStats = (currentState: AppState): ProgressStats => {
+    const verifiedQuizzesCount = Object.values(currentState.completedQuizzes).filter(Boolean).length;
+    const completedTasksCount = Object.values(currentState.completedTasks).filter(Boolean).length;
+    const totalQuizzesCount = 30; // 10 phases * 3 questions
+    const totalTasksCount = 10; // 10 phase terminal tasks
+    const curriculumPercentage = Math.min(
+      100,
+      Math.round(
+        ((verifiedQuizzesCount + completedTasksCount) / (totalQuizzesCount + totalTasksCount)) * 100
+      )
+    );
+
+    return {
+      verifiedQuizzesCount,
+      totalQuizzesCount,
+      completedTasksCount,
+      totalTasksCount,
+      curriculumPercentage,
+    };
+  };
+
+  // Initial visit telemetry ping
+  useEffect(() => {
+    if (state.studentIdentity) {
+      const stats = getProgressStats(state);
+      telemetry.sendBuffered(
+        state.studentIdentity,
+        {
+          type: 'visit',
+          description: `Platform opened / session resumed by ${state.studentIdentity.name}`,
+          details: `Active phase: Phase ${state.activePhaseId}`,
+          timestamp: new Date().toISOString(),
+        },
+        stats
+      );
+    }
+  }, []);
 
   const triggerToast = (toastData: Omit<ToastMessage, 'id'>) => {
     const id = Math.random().toString(36).substring(2, 9);
@@ -126,7 +186,21 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       if (view === 'uimap') updatedChecklist.inspectedUIMap = true;
       if (view === 'curriculum') updatedChecklist.viewedCurriculum = true;
       checkAndCelebrateChecklistCompletion(updatedChecklist);
-      return { ...prev, currentView: view, checklist: updatedChecklist };
+
+      const nextState = { ...prev, currentView: view, checklist: updatedChecklist };
+      const stats = getProgressStats(nextState);
+
+      telemetry.sendBuffered(
+        nextState.studentIdentity,
+        {
+          type: 'navigation',
+          description: `Navigated to view: ${view}`,
+          timestamp: new Date().toISOString(),
+        },
+        stats
+      );
+
+      return nextState;
     });
     window.scrollTo(0, 0);
   };
@@ -135,11 +209,25 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setState((prev) => {
       const updatedChecklist = { ...prev.checklist, viewedCurriculum: true };
       checkAndCelebrateChecklistCompletion(updatedChecklist);
-      return {
+
+      const nextState = {
         ...prev,
         activePhaseId: phaseId,
         checklist: updatedChecklist,
       };
+
+      const stats = getProgressStats(nextState);
+      telemetry.sendBuffered(
+        nextState.studentIdentity,
+        {
+          type: 'phase_select',
+          description: `Selected Phase ${phaseId < 10 ? `0${phaseId}` : phaseId}`,
+          timestamp: new Date().toISOString(),
+        },
+        stats
+      );
+
+      return nextState;
     });
   };
 
@@ -153,11 +241,38 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         };
         checkAndCelebrateChecklistCompletion(updatedChecklist);
 
-        return {
+        const nextCompletedQuizzes = { ...prev.completedQuizzes, [key]: true };
+        const nextState = {
           ...prev,
-          completedQuizzes: { ...prev.completedQuizzes, [key]: true },
+          completedQuizzes: nextCompletedQuizzes,
           checklist: updatedChecklist,
         };
+
+        const stats = getProgressStats(nextState);
+        telemetry.sendBuffered(
+          nextState.studentIdentity,
+          {
+            type: 'quiz_verified',
+            description: `Verified Phase ${phaseId} Quiz Question #${questionIdx + 1}`,
+            timestamp: new Date().toISOString(),
+          },
+          stats
+        );
+
+        if (stats.curriculumPercentage === 100 && nextState.studentIdentity) {
+          telemetry.sendImmediate(
+            nextState.studentIdentity,
+            {
+              type: 'curriculum_completed',
+              description: `100% Curriculum Completed (All 10 Phases & Challenges)`,
+              details: `Total Quizzes: 30/30 • Total Tasks: 10/10`,
+              timestamp: new Date().toISOString(),
+            },
+            stats
+          );
+        }
+
+        return nextState;
       });
 
       triggerToast({
@@ -177,11 +292,38 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         };
         checkAndCelebrateChecklistCompletion(updatedChecklist);
 
-        return {
+        const nextCompletedTasks = { ...prev.completedTasks, [phaseId]: true };
+        const nextState = {
           ...prev,
-          completedTasks: { ...prev.completedTasks, [phaseId]: true },
+          completedTasks: nextCompletedTasks,
           checklist: updatedChecklist,
         };
+
+        const stats = getProgressStats(nextState);
+        telemetry.sendBuffered(
+          nextState.studentIdentity,
+          {
+            type: 'task_completed',
+            description: `Executed Terminal Challenge for Phase ${phaseId}`,
+            timestamp: new Date().toISOString(),
+          },
+          stats
+        );
+
+        if (stats.curriculumPercentage === 100 && nextState.studentIdentity) {
+          telemetry.sendImmediate(
+            nextState.studentIdentity,
+            {
+              type: 'curriculum_completed',
+              description: `100% Curriculum Completed (All 10 Phases & Challenges)`,
+              details: `Total Quizzes: 30/30 • Total Tasks: 10/10`,
+              timestamp: new Date().toISOString(),
+            },
+            stats
+          );
+        }
+
+        return nextState;
       });
 
       triggerToast({
@@ -212,13 +354,66 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       type: 'info',
       title: 'Profile Saved',
       message: `Welcome! Pacing set for ${
-        profile.experience === 'intermediate' ? 'Phase 04 (Branching)' : profile.experience === 'advanced' ? 'Phase 07 (CI/CD)' : 'Phase 01 (Git Basics)'
+        profile.experience === 'intermediate'
+          ? 'Phase 04 (Branching)'
+          : profile.experience === 'advanced'
+          ? 'Phase 07 (CI/CD)'
+          : 'Phase 01 (Git Basics)'
       }.`,
     });
   };
 
   const setPersonalizationOpen = (open: boolean) => {
     setState((prev) => ({ ...prev, personalizationOpen: open }));
+  };
+
+  const setStudentIdentity = (identity: StudentIdentity) => {
+    setState((prev) => {
+      const isUpdate = Boolean(prev.studentIdentity);
+      const updatedState = {
+        ...prev,
+        studentIdentity: identity,
+        identityModalOpen: false,
+      };
+
+      const stats = getProgressStats(updatedState);
+
+      if (isUpdate) {
+        telemetry.sendImmediate(
+          identity,
+          {
+            type: 'profile_update',
+            description: `Student details updated: ${identity.name} (@${identity.githubUsername})`,
+            details: `Department: ${identity.department.toUpperCase()}`,
+            timestamp: new Date().toISOString(),
+          },
+          stats
+        );
+      } else {
+        telemetry.sendImmediate(
+          identity,
+          {
+            type: 'registration',
+            description: `New student registration: ${identity.name} (@${identity.githubUsername})`,
+            details: `Department: ${identity.department.toUpperCase()}`,
+            timestamp: new Date().toISOString(),
+          },
+          stats
+        );
+      }
+
+      return updatedState;
+    });
+
+    triggerToast({
+      type: 'success',
+      title: 'Identity Confirmed',
+      message: `Welcome, ${identity.name}! Your progress is being tracked on Discord.`,
+    });
+  };
+
+  const setIdentityModalOpen = (open: boolean) => {
+    setState((prev) => ({ ...prev, identityModalOpen: open }));
   };
 
   const startTour = () => {
@@ -237,6 +432,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
           ...prev,
           tourActive: false,
           tourCompleted: true,
+          // If the student hasn't entered their identity yet, prompt them right after the tour finishes!
+          identityModalOpen: !prev.studentIdentity,
         };
       }
       return {
@@ -258,6 +455,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       ...prev,
       tourActive: false,
       tourCompleted: true,
+      // If the student hasn't entered their identity yet, prompt them right after skipping the tour!
+      identityModalOpen: !prev.studentIdentity,
     }));
     triggerToast({
       type: 'info',
@@ -317,6 +516,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         recordTaskComplete,
         setUserProfile,
         setPersonalizationOpen,
+        setStudentIdentity,
+        setIdentityModalOpen,
         startTour,
         nextTourStep,
         prevTourStep,

@@ -13,10 +13,11 @@ import {
   Sparkles,
   HelpCircle,
   Compass,
+  User,
 } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
-  const { state, setView, startTour, setHelpCenterOpen } = useApp();
+  const { state, setView, startTour, setHelpCenterOpen, setIdentityModalOpen } = useApp();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navItems: {
@@ -157,12 +158,30 @@ export const Navbar: React.FC = () => {
             </span>
           </button>
 
-          {/* Client status capsule */}
-          <div className="hidden 2xl:inline-flex items-center px-3 py-1 rounded-full border border-line bg-surface text-xs font-mono text-muted">
-            <span className="text-[10px] font-semibold text-ink uppercase tracking-wider">
-              STATIC CLIENT APP
-            </span>
-          </div>
+          {/* Student Identity Pill */}
+          {state.studentIdentity ? (
+            <button
+              type="button"
+              onClick={() => setIdentityModalOpen(true)}
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-line bg-surface hover:bg-paper text-xs font-mono text-ink cursor-pointer transition-colors"
+              title="Click to view or edit student details"
+            >
+              <User className="size-3 text-safe" />
+              <span className="text-[11px] font-semibold truncate max-w-[140px]">
+                {state.studentIdentity.name.split(' ')[0]} (@{state.studentIdentity.githubUsername})
+              </span>
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setIdentityModalOpen(true)}
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-safe/30 bg-safe-soft text-xs font-mono text-safe hover:bg-safe hover:text-paper cursor-pointer transition-colors"
+              title="Click to set your Name and GitHub username"
+            >
+              <User className="size-3" />
+              <span className="text-[11px] font-semibold">Enter Details</span>
+            </button>
+          )}
         </div>
 
         {/* Mobile menu hamburger */}
@@ -212,29 +231,46 @@ export const Navbar: React.FC = () => {
             );
           })}
 
-          <div className="pt-2 border-t border-line/60 flex items-center justify-between gap-2">
+          <div className="pt-2 border-t border-line/60 flex flex-col gap-2">
             <button
               type="button"
               onClick={() => {
                 setMobileMenuOpen(false);
-                startTour();
+                setIdentityModalOpen(true);
               }}
-              className="flex-1 flex items-center justify-center gap-2 py-2 rounded-xl border border-line bg-paper text-xs font-semibold text-ink cursor-pointer"
+              className="w-full flex items-center justify-center gap-2 py-2 rounded-xl border border-safe/30 bg-safe-soft text-xs font-semibold text-safe cursor-pointer"
             >
-              <Sparkles className="size-3.5 text-safe" />
-              <span>Take Tour</span>
+              <User className="size-3.5 text-safe" />
+              <span>
+                {state.studentIdentity
+                  ? `${state.studentIdentity.name} (@${state.studentIdentity.githubUsername})`
+                  : 'Enter Name & GitHub Username'}
+              </span>
             </button>
-            <button
-              type="button"
-              onClick={() => {
-                setMobileMenuOpen(false);
-                setHelpCenterOpen(true);
-              }}
-              className="flex-1 flex items-center justify-center gap-2 py-2 rounded-xl border border-line bg-paper text-xs font-semibold text-ink cursor-pointer"
-            >
-              <HelpCircle className="size-3.5 text-safe" />
-              <span>Help Center</span>
-            </button>
+            <div className="flex items-center justify-between gap-2">
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  startTour();
+                }}
+                className="flex-1 flex items-center justify-center gap-2 py-2 rounded-xl border border-line bg-paper text-xs font-semibold text-ink cursor-pointer"
+              >
+                <Sparkles className="size-3.5 text-safe" />
+                <span>Take Tour</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  setHelpCenterOpen(true);
+                }}
+                className="flex-1 flex items-center justify-center gap-2 py-2 rounded-xl border border-line bg-paper text-xs font-semibold text-ink cursor-pointer"
+              >
+                <HelpCircle className="size-3.5 text-safe" />
+                <span>Help Center</span>
+              </button>
+            </div>
           </div>
         </div>
       )}
