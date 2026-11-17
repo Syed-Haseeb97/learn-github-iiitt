@@ -13,6 +13,14 @@ export interface UserProfile {
   completedAt?: string;
 }
 
+export interface StudentIdentity {
+  name: string;
+  githubUsername: string;
+  department: 'cse' | 'ece' | 'vlsi_other';
+  registeredAt: string;
+  updatedAt?: string;
+}
+
 export interface OnboardingChecklistState {
   viewedCurriculum: boolean;
   inspectedUIMap: boolean;
@@ -26,6 +34,8 @@ export interface AppState {
   completedQuizzes: Record<string, boolean>;
   completedTasks: Record<number, boolean>;
   userProfile: UserProfile | null;
+  studentIdentity: StudentIdentity | null;
+  identityModalOpen: boolean;
   tourCompleted: boolean;
   tourActive: boolean;
   tourStep: number;

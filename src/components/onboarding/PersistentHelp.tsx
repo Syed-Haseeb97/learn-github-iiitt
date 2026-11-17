@@ -6,6 +6,7 @@ import {
   Play,
   RotateCcw,
   Sliders,
+  User,
   ChevronDown,
   ChevronUp,
   MessageSquare,
@@ -22,6 +23,7 @@ export const PersistentHelp: React.FC = () => {
     startTour,
     resetOnboarding,
     setPersonalizationOpen,
+    setIdentityModalOpen,
     setHelpCenterOpen,
   } = useApp();
 
@@ -102,7 +104,7 @@ export const PersistentHelp: React.FC = () => {
             </div>
 
             {/* Quick Action Grid */}
-            <div className="mt-6 grid sm:grid-cols-3 gap-3">
+            <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
               <button
                 type="button"
                 onClick={startTour}
@@ -116,7 +118,7 @@ export const PersistentHelp: React.FC = () => {
                     Take Tour Again
                   </div>
                   <div className="text-[11px] text-muted mt-0.5">
-                    Relaunch spotlight coachmarks.
+                    Coachmark steps.
                   </div>
                 </div>
               </button>
@@ -134,7 +136,28 @@ export const PersistentHelp: React.FC = () => {
                     Reset Checklist
                   </div>
                   <div className="text-[11px] text-muted mt-0.5">
-                    Start walkthrough fresh.
+                    Restart milestones.
+                  </div>
+                </div>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setHelpCenterOpen(false);
+                  setIdentityModalOpen(true);
+                }}
+                className="p-3.5 rounded-xl border border-line bg-surface hover:bg-paper text-left transition-all cursor-pointer flex flex-col justify-between group hover:border-safe"
+              >
+                <div className="flex size-7 items-center justify-center rounded-lg bg-safe-soft text-safe border border-safe/25 mb-2 group-hover:bg-safe group-hover:text-paper transition-colors">
+                  <User className="size-3.5" />
+                </div>
+                <div>
+                  <div className="font-sans text-xs font-semibold text-ink">
+                    Student Details
+                  </div>
+                  <div className="text-[11px] text-muted mt-0.5">
+                    {state.studentIdentity ? `@${state.studentIdentity.githubUsername}` : 'Name & GitHub handle.'}
                   </div>
                 </div>
               </button>
@@ -152,10 +175,10 @@ export const PersistentHelp: React.FC = () => {
                 </div>
                 <div>
                   <div className="font-sans text-xs font-semibold text-ink">
-                    Change Profile
+                    Pacing Track
                   </div>
                   <div className="text-[11px] text-muted mt-0.5">
-                    Update experience & goals.
+                    Experience & goals.
                   </div>
                 </div>
               </button>

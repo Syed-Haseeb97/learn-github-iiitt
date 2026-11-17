@@ -89,6 +89,13 @@ npm run build
 npm run preview
 ```
 
+### Environment Variables
+To enable Discord progress telemetry locally and in production:
+```bash
+cp .env.example .env.local
+```
+* `DISCORD_WEBHOOK_URL`: Discord channel webhook URL for student registration and activity telemetry. On Vercel, add this in **Project Settings -> Environment Variables**.
+
 ---
 
 ## Contributing

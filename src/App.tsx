@@ -10,6 +10,7 @@ import { AssessmentsView } from './components/assessments/AssessmentsView';
 import { ProjectsLabView } from './components/projects/ProjectsLabView';
 import { WhatsNextView } from './components/roadmap/WhatsNextView';
 import { PersonalizationModal } from './components/onboarding/PersonalizationModal';
+import { StudentIdentityModal } from './components/onboarding/StudentIdentityModal';
 import { SpotlightTour } from './components/onboarding/SpotlightTour';
 import { OnboardingChecklist } from './components/onboarding/OnboardingChecklist';
 import { PersistentHelp } from './components/onboarding/PersistentHelp';
@@ -40,6 +41,7 @@ export const App: React.FC = () => {
 
         {/* First-time and persistent guidance components */}
         <PersonalizationModal />
+        <StudentIdentityModal />
         <SpotlightTour />
         <OnboardingChecklist />
         <PersistentHelp />
